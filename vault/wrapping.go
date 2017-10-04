@@ -120,6 +120,10 @@ func (c *Core) wrapInCubbyhole(req *logical.Request, resp *logical.Response) (*l
 		resp.WrapInfo.CreationPath = req.Path
 	}
 
+	if auth != nil && auth.EntityID != "" {
+		resp.WrapInfo.WrappedEntityID = auth.EntityID
+	}
+
 	// This will only be non-nil if this response contains a token, so in that
 	// case put the accessor in the wrap info.
 	if resp.Auth != nil {
